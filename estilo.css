@@ -13,3 +13,9 @@
     display: block;
     position: absolute;
 }
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    left:45%;
+}
