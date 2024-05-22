@@ -2,8 +2,9 @@
 const quadrado = document.getElementById("quadrado");
 const comida = document.getElementById("comida");
 const titulo=document.getElementById("titulo");
-var largura=10;
-var altura=10;
+const botao = document.getElementById("botao");
+var largura=30;
+var altura=30;
 var pont=0;
 
 
@@ -20,6 +21,7 @@ function calculaDistancia(x,y,x2,y2){ // calcula a distancia entre o quadrado e 
 return dist;
 }
 
+
 var bo=true;
 if(bo==true){
     comida.style.left = `10px`;
@@ -27,9 +29,22 @@ if(bo==true){
     var posX=10;
     var posY=10;
     bo=false;
+    titulo.textContent=`Pontuação:${pont}`;
 }
 
-titulo.textContent=`Pontuação:${pont}`;
+quadrado.style.cursor="none";
+
+botao.addEventListener('click',()=>{
+    pont=0;
+    titulo.textContent=`Pontuação:${pont}`;
+    quadrado.style.width=`30px`;
+    quadrado.style.height=`30px`;
+    quadrado.style.marginLeft=`-15px`;
+    quadrado.style.marginTop=`-15px`;
+    largura=30;
+    altura=30;
+
+});
 
 document.addEventListener('mousemove',(event)=>{
     
@@ -37,18 +52,21 @@ document.addEventListener('mousemove',(event)=>{
     const mousey=event.clientY;
 
     quadradoMove(mousex,mousey);
-    var dist=calculaDistancia(mousex,mousey,posX,posY);
-    if(dist<20){
+    var dist=calculaDistancia(mousex,mousey,posX+10,posY+10);
+    console.log("Distancia:"+dist);
+    if(dist<10*Math.sqrt(2)){
         const maxWidth = window.innerWidth - 3;
         const maxHeight = window.innerHeight - 3;
         posX = Math.floor(Math.random() * maxWidth);
         posY = Math.floor(Math.random() * maxHeight);
         comida.style.left = `${posX}px`;
         comida.style.top = `${posY}px`;
-        largura=largura+2;
-        altura=altura+2;
+        largura=largura+5;
+        altura=altura+5;
         quadrado.style.width=`${largura}px`;
         quadrado.style.height=`${altura}px`;
+        quadrado.style.marginLeft=`${-largura/2}px`;
+        quadrado.style.marginTop=`${-altura/2}px`;
         pont++;
         titulo.textContent=`Pontuação:${pont}`;
     }
