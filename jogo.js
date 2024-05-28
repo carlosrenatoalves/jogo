@@ -94,7 +94,7 @@ document.addEventListener('mousemove', (event) => {
 
         if (dist < Math.floor(0.25 * norm(largura, altura))) {
 
-            posicaoComida(i);
+            comida[i]=null;
             if (largura < 1000) {
                 largura = largura + 1;
                 altura = altura + 1;
