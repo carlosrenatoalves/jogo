@@ -1,7 +1,8 @@
 
+const tam=100;
 const quadrado = document.getElementById("quadrado");
 let comida = new Array();
-for (i = 0; i < 30; i++) {
+for (i = 0; i < tam; i++) {
     comida[i] = document.createElement("img");
     comida[i].src="comida.png";
     comida[i].className="comida";
@@ -44,20 +45,20 @@ function posicaoComida(i) {
 var bo = true;
 if (bo == true) {
 
-    for(i=0;i<30;i++){
+    for(i=0;i<tam;i++){
         posicaoComida(i);
     }
     
 
     bo = false;
-    titulo.textContent = `Pontuação:${pont}`;
+    titulo.textContent = `Massa:${pont}`;
 }
 
 quadrado.style.cursor = "none";
 
 botao.addEventListener('click', () => {
     pont = 0;
-    titulo.textContent = `Pontuação:${pont}`;
+    titulo.textContent = `Massa:${pont}`;
     quadrado.style.width = `30px`;
     quadrado.style.height = `30px`;
     quadrado.style.marginLeft = `-15px`;
@@ -84,14 +85,13 @@ document.addEventListener('mousemove', (event) => {
     quadradoMove(mousex, mousey);
 
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < tam; i++) {
         var dist = calculaDistancia(mousex, mousey, posX[i] + 15, posY[i] + 15);
 
         if (dist < Math.floor(0.25 * norm(largura, altura))) {
 
             posicaoComida(i);
-
-      if(largura<1000){
+           if(largura<1000){
             largura = largura + 5;
             altura = altura + 5;
             quadrado.style.width = `${largura}px`;
@@ -101,7 +101,7 @@ document.addEventListener('mousemove', (event) => {
            }
 
             pont++;
-            titulo.textContent = `Pontuação:${pont}`;
+            titulo.textContent = `Massa:${pont}`;
         }
     }
 });
