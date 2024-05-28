@@ -1,13 +1,18 @@
 
-const tam=100;
+const tam = 100;
+
 const quadrado = document.getElementById("quadrado");
+
 let comida = new Array();
 for (i = 0; i < tam; i++) {
+
     comida[i] = document.createElement("img");
-    comida[i].src="comida.png";
-    comida[i].className="comida";
+    comida[i].src = "comida.png";
+    comida[i].className = "comida";
     document.body.appendChild(comida[i]);
 }
+
+
 const titulo = document.getElementById("titulo");
 const botao = document.getElementById("botao");
 let largura = 30;
@@ -30,14 +35,15 @@ function calculaDistancia(x, y, x2, y2) { // calcula a distancia entre o quadrad
 }
 
 function posicaoComida(i) {
+    let angulo=Math.floor(Math.random() * 360);
+    const maxWidth = window.innerWidth - 3;
+    const maxHeight = window.innerHeight - 3;
+    posX[i] = Math.floor(Math.random() * maxWidth);
+    posY[i] = Math.floor(Math.random() * maxHeight);
 
-        const maxWidth = window.innerWidth - 3;
-        const maxHeight = window.innerHeight - 3;
-        posX[i] = Math.floor(Math.random() * maxWidth);
-        posY[i] = Math.floor(Math.random() * maxHeight);
-
-        comida[i].style.left = `${posX[i]}px`;
-        comida[i].style.top = `${posY[i]}px`;
+    comida[i].style.left = `${posX[i]}px`;
+    comida[i].style.top = `${posY[i]}px`;
+    comida[i].style.transform = `rotate(${angulo}deg)`;
 }
 
 
@@ -45,11 +51,9 @@ function posicaoComida(i) {
 var bo = true;
 if (bo == true) {
 
-    for(i=0;i<tam;i++){
+    for (i = 0; i < tam; i++) {
         posicaoComida(i);
     }
-    
-
     bo = false;
     titulo.textContent = `Massa:${pont}`;
 }
@@ -66,7 +70,7 @@ botao.addEventListener('click', () => {
     largura = 30;
     altura = 30;
 
-    for(i=0;i<30;i++){
+    for (i = 0; i < 100; i++) {
         posicaoComida(i);
     }
 
@@ -84,21 +88,21 @@ document.addEventListener('mousemove', (event) => {
 
     quadradoMove(mousex, mousey);
 
-
     for (i = 0; i < tam; i++) {
+
         var dist = calculaDistancia(mousex, mousey, posX[i] + 15, posY[i] + 15);
 
         if (dist < Math.floor(0.25 * norm(largura, altura))) {
 
             posicaoComida(i);
-           if(largura<1000){
-            largura = largura + 5;
-            altura = altura + 5;
-            quadrado.style.width = `${largura}px`;
-            quadrado.style.height = `${altura}px`;
-            quadrado.style.marginLeft = `${-largura / 2}px`;
-            quadrado.style.marginTop = `${-altura / 2}px`;
-           }
+            if (largura < 1000) {
+                largura = largura + 1;
+                altura = altura + 1;
+                quadrado.style.width = `${largura}px`;
+                quadrado.style.height = `${altura}px`;
+                quadrado.style.marginLeft = `${-largura / 2}px`;
+                quadrado.style.marginTop = `${-altura / 2}px`;
+            }
 
             pont++;
             titulo.textContent = `Massa:${pont}`;
