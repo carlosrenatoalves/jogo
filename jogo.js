@@ -91,12 +91,14 @@ document.addEventListener('mousemove', (event) => {
 
             posicaoComida(i);
 
+      if(largura<1000){
             largura = largura + 5;
             altura = altura + 5;
             quadrado.style.width = `${largura}px`;
             quadrado.style.height = `${altura}px`;
             quadrado.style.marginLeft = `${-largura / 2}px`;
             quadrado.style.marginTop = `${-altura / 2}px`;
+           }
 
             pont++;
             titulo.textContent = `Pontuação:${pont}`;
