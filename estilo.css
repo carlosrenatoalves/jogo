@@ -8,7 +8,7 @@
     z-index: -1;
 }
 
-#comida{
+.comida{
     height: 30px;
     width: 30px;
     display: block;
@@ -27,4 +27,8 @@ div{
 
 #botao{
     margin-left: 100px;
+}
+
+body{
+    background-color: rgb(112, 250, 112);
 }
