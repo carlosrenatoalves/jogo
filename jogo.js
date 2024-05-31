@@ -27,7 +27,6 @@ let posY = new Array();
 let angulo=new Array();
 let xgoal2= new Array();
 let ygoal2=new Array();
-let interval=new Array();
 
 //###################################### Funções ########################################
 
@@ -139,9 +138,6 @@ if (bo == true) {
 
 quadrado.style.cursor = "none";
 
-for(i=0;i<tam;i++){
-    interval[i]=setInterval(geraGoal,3000);
-}
 const interval2=setInterval(trajetoria,1);
 
 
