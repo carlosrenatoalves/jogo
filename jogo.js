@@ -3,7 +3,7 @@
 // ################################### Declaração de Variáveis##########################
 
 
-const tam = 100;
+const tam = 200;
 
 const quadrado = document.getElementById("quadrado");
 
@@ -27,6 +27,12 @@ let posY = new Array();
 let angulo=new Array();
 let xgoal2= new Array();
 let ygoal2=new Array();
+let acm2 = new Array();
+
+ for(i=0;i<tam;i++){
+        acm2[i]=0;
+    }
+
 
 //###################################### Funções ########################################
 
@@ -94,13 +100,13 @@ function geraGoal(i){
 function trajetoria(){
     let ky=10;
     let ki=1;
-    let kp=0.1;
+    let kp=0.2;
     let velocidadegoal;
     let lambda;
     let erro2;
-    let acm2=0;
     let angulogoal;
     let dt=0.1;
+
 
     for (i=0;i<tam;i++){
         
@@ -110,8 +116,8 @@ function trajetoria(){
         velocidadegoal=kp*norm(xgoal2[i]-posX[i],ygoal2[i]-posY[i]);
         
         erro2=angulogoal-angulo[i];
-        acm2=acm2+erro2;
-        lambda=ky*(erro2)+ ki*acm2*dt ;
+        acm2[i]=acm2[i]+erro2;
+        lambda=ky*(erro2)+ ki*acm2[i]*dt ;
 
         angulo[i]=angulo[i]+(lambda)*dt;
         
