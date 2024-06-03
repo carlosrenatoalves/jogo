@@ -3,7 +3,7 @@
 // ################################### Declaração de Variáveis##########################
 
 
-const tam = 200;
+const tam = 100;
 
 const quadrado = document.getElementById("quadrado");
 
@@ -53,8 +53,8 @@ function moveComida(i,x,y,tetha){
 
 function setPosicaoInicial(i) {
 
-    const maxWidth = window.innerWidth - 3;
-    const maxHeight = window.innerHeight - 3;
+    const maxWidth = window.innerWidth;
+    const maxHeight = window.innerHeight ;
     posX[i] = (Math.random() * maxWidth);
     posY[i] = (Math.random() * maxHeight);
     angulo[i]=(Math.random()*Math.PI/2);
@@ -75,8 +75,8 @@ return Math.atan2((ygoal-y),(xgoal-x))
 function geraPontoAleatorio(){
     let x;let y;
     
-    const maxWidth = window.innerWidth - 3;
-    const maxHeight = window.innerHeight - 3;
+    const maxWidth = window.innerWidth ;
+    const maxHeight = window.innerHeight ;
     x= Math.floor(Math.random() * maxWidth);
     y = Math.floor(Math.random() * maxHeight);
 
@@ -92,28 +92,33 @@ function geraGoal(i){
 
 
 function trajetoria(){
-    let ky=1000;
-    let velocidadegoal=1000;
+    let ky=10;
+    let ki=1;
+    let kp=0.1;
+    let velocidadegoal;
     let lambda;
     let erro2;
     let acm2=0;
     let angulogoal;
+    let dt=0.1;
 
     for (i=0;i<tam;i++){
         
         
         angulogoal=calculaAngulo(posX[i],posY[i],xgoal2[i],ygoal2[i]);
+
+        velocidadegoal=kp*norm(xgoal2[i]-posX[i],ygoal2[i]-posY[i]);
         
         erro2=angulogoal-angulo[i];
         acm2=acm2+erro2;
-        lambda=ky*(erro2)+ 70*acm2*0.001 ;
+        lambda=ky*(erro2)+ ki*acm2*dt ;
 
-        angulo[i]=angulo[i]+(lambda)*0.001;
+        angulo[i]=angulo[i]+(lambda)*dt;
         
-        posX[i]=posX[i]+velocidadegoal*Math.cos(angulo[i])*0.001;
-        posY[i]=posY[i]+velocidadegoal*Math.sin(angulo[i])*0.001;
+        posX[i]=posX[i]+velocidadegoal*Math.cos(angulo[i])*dt;
+        posY[i]=posY[i]+velocidadegoal*Math.sin(angulo[i])*dt;
 
-        if(calculaDistancia(posX[i],posY[i],xgoal2[i],ygoal2[i])<0.01){
+        if(calculaDistancia(posX[i],posY[i],xgoal2[i],ygoal2[i])<5){
             geraGoal(i);
         }
         
@@ -138,7 +143,8 @@ if (bo == true) {
 
 quadrado.style.cursor = "none";
 
-const interval2=setInterval(trajetoria,1);
+
+const interval2=setInterval(trajetoria,20);
 
 
 
@@ -157,6 +163,7 @@ botao.addEventListener('click', () => {   // reset jogo
 
     for (i = 0; i < tam; i++) {
         setPosicaoInicial(i);
+       geraGoal(i); 
     }
 
 });
@@ -178,7 +185,7 @@ document.addEventListener('mousemove', (event) => {
         var dist = calculaDistancia(mousex, mousey, posX[i] + 15, posY[i] + 15);
 
         if (dist < Math.floor(0.25 * norm(largura, altura))) {
-
+            
             setPosicaoInicial(i);
 
             if (largura < 1000) {
